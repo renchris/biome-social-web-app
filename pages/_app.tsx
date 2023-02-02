@@ -8,7 +8,13 @@ import '../styles/globals.css'
 const activeChainId = ChainId.Mainnet
 
 const MyApp = ({ Component, pageProps }: AppProps) => (
-  <ThirdwebProvider desiredChainId={activeChainId}>
+  <ThirdwebProvider
+    desiredChainId={activeChainId}
+    authConfig={{
+      domain: process.env.NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN || '',
+      authUrl: '/api/auth',
+    }}
+  >
     <ChakraProvider resetCSS theme={theme}>
       <Component {...pageProps} />
     </ChakraProvider>
