@@ -9,9 +9,20 @@ import * as ethers from 'ethers'
 const users: Record<string, any> = {}
 
 const ethersGeneratedPrivateKey = ethers.Wallet.createRandom().privateKey
+let thirdwebDomain
+if (process.env.secrets) {
+  const jsonStr = process.env.secrets.replace(
+    /(\w+:)|(\w+ :)/g,
+    (matchedStr) => `"${matchedStr.substring(0, matchedStr.length - 1)}":`,
+  )
+  const secretObject = JSON.parse(jsonStr)
+  thirdwebDomain = secretObject.NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN
+} else {
+  thirdwebDomain = process.env.NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN
+}
 
 export const { ThirdwebAuthHandler, getUser } = ThirdwebAuth({
-  domain: process.env.NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN || '',
+  domain: thirdwebDomain,
   wallet: new PrivateKeyWallet(process.env.THIRDWEB_AUTH_PRIVATE_KEY || ethersGeneratedPrivateKey),
   // NOTE: All these callbacks are optional! You can delete this section and
   // the Auth flow will still work.
