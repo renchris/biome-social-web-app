@@ -1,9 +1,8 @@
 import { ChakraProvider } from '@chakra-ui/react'
 import type { AppProps } from 'next/app'
 import { ChainId, ThirdwebProvider } from '@thirdweb-dev/react'
+import '../styles/styles.css'
 import theme from '../theme'
-import '../styles/globals.css'
-
 // This is the chainId your dApp will work on.
 const activeChainId = ChainId.Goerli
 let thirdwebDomain
