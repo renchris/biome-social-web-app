@@ -39,7 +39,6 @@ const Home: NextPage = () => {
     )
     const balanceString = balance.toString()
     const balanceDigit = (parseInt(balanceString, 10) / 1000000000000000000).toFixed(4)
-
     setEthBalance(`${balanceDigit} ETH`)
     console.log(balanceDigit)
   }
@@ -172,7 +171,7 @@ const Home: NextPage = () => {
                     Claim Tier 1
                   </Web3Button>
                   <Text textAlign="center">
-                    {hasNft ? 'You have this NFT!' : 'You do not have this NFT'}
+                    {hasNft ? 'You have this NFT already!' : 'You do not have this NFT yet'}
                   </Text>
                   <Text
                     mt="16px"
@@ -200,7 +199,7 @@ const Home: NextPage = () => {
                   tier="Tier 2"
                   hero="Moo"
                   imagePath="/biome-social-pioneer-2-moo-transparent-2x.png"
-                  href=""
+                  href="https://testnets.opensea.io/assets/goerli/0x2684b838ca83a04398141bd6b0a1c9da2f4805e9/1"
                 />
                 <Flex justify="space-evenly" width="100%">
                   <Text
@@ -236,7 +235,7 @@ const Home: NextPage = () => {
                     Claim Tier 2
                   </Web3Button>
                   <Text textAlign="center">
-                    {hasNft1 ? 'You have this NFT!' : 'You do not have this NFT'}
+                    {hasNft1 ? 'You have this NFT already!' : 'You do not have this NFT yet'}
                   </Text>
                   <Text
                     mt="16px"
@@ -265,7 +264,7 @@ const Home: NextPage = () => {
                   tier="Tier 3"
                   hero="Bee"
                   imagePath="/biome-social-piooner-3-bee-transparent-2x.png"
-                  href=""
+                  href="https://testnets.opensea.io/assets/goerli/0x2684b838ca83a04398141bd6b0a1c9da2f4805e9/2"
                 />
                 <Flex justify="space-evenly" width="100%">
                   <Text
@@ -301,7 +300,7 @@ const Home: NextPage = () => {
                     Claim Tier 3
                   </Web3Button>
                   <Text textAlign="center">
-                    {hasNft2 ? 'You have this NFT!' : 'You do not have this NFT'}
+                    {hasNft2 ? 'You have this NFT already!' : 'You do not have this NFT yet'}
                   </Text>
                   <Text
                     mt="16px"
