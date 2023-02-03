@@ -2,6 +2,7 @@ import {
   ConnectWallet,
   useAddress,
   useUser,
+  Web3Button,
 } from '@thirdweb-dev/react'
 import type { NextPage } from 'next'
 import {
@@ -15,11 +16,14 @@ const Home: NextPage = () => {
   const address = useAddress()
   const { user, isLoggedIn } = useUser()
   const [secret, setSecret] = useState()
+  const [buttonTextStatus, setButtonTextStatus] = useState('')
   const getSecret = async () => {
     const res = await fetch('/api/secrets')
     const data = await res.json()
     setSecret(data.message)
   }
+  const tokenId = 0
+  const quantity = 1
   return (
     <Box className={styles.container}>
       <Container alignItems="center">
@@ -36,6 +40,17 @@ const Home: NextPage = () => {
         <Button onClick={async () => getSecret()}>
           Get Secret
         </Button>
+        <Web3Button
+          contractAddress="0x66B2e6750baE1271Bc4C9bdaDEcaD846582320C7"
+          action={(contract) => contract.erc1155.claim(tokenId, quantity)}
+          onSuccess={() => setButtonTextStatus('Claimed!')}
+          onError={() => setButtonTextStatus('Something went wrong')}
+        >
+          Claim
+        </Web3Button>
+        <Text>
+          {buttonTextStatus}
+        </Text>
         <Text>
           Connected Wallet:
           {' '}
