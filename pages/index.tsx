@@ -21,6 +21,9 @@ const Home: NextPage = () => {
   const address = useAddress()
   const { user, isLoggedIn } = useUser()
   const [secret, setSecret] = useState()
+  const [hasNft, setHasNft] = useState<boolean | undefined>(false)
+  const [hasNft1, setHasNft1] = useState<boolean | undefined>(false)
+  const [hasNft2, setHasNft2] = useState<boolean | undefined>(false)
   const [ethBalance, setEthBalance] = useState('0 ETH')
   const [buttonTextStatusOne, setButtonTextStatusOne] = useState('Ready')
   const [buttonTextStatusTwo, setButtonTextStatusTwo] = useState('Ready')
@@ -46,20 +49,26 @@ const Home: NextPage = () => {
     setSecret(data.message)
   }
 
-  //   const { contract } = useContract(
-  //     '0x2684b838CA83A04398141bd6B0A1c9dA2f4805E9',
-  //     'edition drop',
-  //   )
-  //   useEffect(() => {
-  //     const checkBalance = async () => {
-  //       const balance = await contract?.balanceOf(address, 0/* tokenID */)
-  //       const hasNft = balance?.gt(0/* tokenID */)
-  //       /*
-  // Can add a React setState to pass the NFT
-  // */
-  //     }
-  //     checkBalance()
-  //   }, [contract])
+  const { contract } = useContract(
+    '0x2684b838CA83A04398141bd6B0A1c9dA2f4805E9',
+    'edition-drop',
+  )
+  useEffect(() => {
+    if (address) {
+      const checkBalance = async () => {
+        const balance = await contract?.balanceOf(address, 0/* tokenID */)
+        setHasNft(balance?.gt(0/* tokenID */))
+        const balance1 = await contract?.balanceOf(address, 1/* tokenID */)
+        setHasNft1(balance1?.gt(1/* tokenID */))
+        const balance2 = await contract?.balanceOf(address, 2/* tokenID */)
+        setHasNft2(balance2?.gt(2/* tokenID */))
+        /*
+        Can add a React setState to pass the NFT
+        */
+      }
+      checkBalance()
+    }
+  }, [contract, address])
 
   const darkblockSrcUrl = 'https://app.darkblock.io/platform/eth-goerli/embed/viewer/0x2684b838ca83a04398141bd6b0a1c9da2f4805e9/0'
 
@@ -129,6 +138,9 @@ const Home: NextPage = () => {
                 >
                   Claim Tier 1
                 </Web3Button>
+                <Text textAlign="center">
+                  {hasNft ? 'You have this NFT!' : 'You do not have this NFT'}
+                </Text>
                 <Text
                   mt="16px"
                   size="hairline2"
@@ -182,6 +194,9 @@ const Home: NextPage = () => {
                 >
                   Claim Tier 2
                 </Web3Button>
+                <Text textAlign="center">
+                  {hasNft1 ? 'You have this NFT!' : 'You do not have this NFT'}
+                </Text>
                 <Text
                   mt="16px"
                   size="hairline2"
@@ -236,6 +251,9 @@ const Home: NextPage = () => {
                 >
                   Claim Tier 3
                 </Web3Button>
+                <Text textAlign="center">
+                  {hasNft2 ? 'You have this NFT!' : 'You do not have this NFT'}
+                </Text>
                 <Text
                   mt="16px"
                   size="hairline2"
