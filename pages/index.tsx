@@ -11,6 +11,7 @@ import {
 import { useState } from 'react'
 import styles from '../styles/Home.module.css'
 import Container from './components/Container'
+import NFTCollectionRender from './components/NFTCollectionRender'
 
 const Home: NextPage = () => {
   const address = useAddress()
@@ -41,13 +42,14 @@ const Home: NextPage = () => {
           Get Secret
         </Button>
         <Web3Button
-          contractAddress="0x66B2e6750baE1271Bc4C9bdaDEcaD846582320C7"
+          contractAddress="0x2684b838CA83A04398141bd6B0A1c9dA2f4805E9"
           action={(contract) => contract.erc1155.claim(tokenId, quantity)}
           onSuccess={() => setButtonTextStatus('Claimed!')}
           onError={() => setButtonTextStatus('Something went wrong')}
         >
           Claim
         </Web3Button>
+        {/* <NFTCollectionRender /> */}
         <Text>
           {buttonTextStatus}
         </Text>
