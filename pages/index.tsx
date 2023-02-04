@@ -57,10 +57,10 @@ const Home: NextPage = () => {
     if (address) {
       const checkBalance = async () => {
         const balance = await contract?.balanceOf(address, 0/* tokenID */)
-        setHasNft(balance?.gt(0/* tokenID */))
         const balance1 = await contract?.balanceOf(address, 1/* tokenID */)
-        setHasNft1(balance1?.gt(1/* tokenID */))
         const balance2 = await contract?.balanceOf(address, 2/* tokenID */)
+        setHasNft(balance?.gt(0/* tokenID */))
+        setHasNft1(balance1?.gt(1/* tokenID */))
         setHasNft2(balance2?.gt(2/* tokenID */))
         /*
         Can add a React setState to pass the NFT
@@ -91,14 +91,13 @@ const Home: NextPage = () => {
 
   return (
     <Box>
-
       <Box>
         <Container alignItems="center">
           <About />
           <Box pt="32px">
             <ConnectWallet />
           </Box>
-          <Button mt="12px" onClick={async () => getEthBalance()}>
+          <Button mt="12px" onClick={async () => (isLoggedIn ? getEthBalance() : null)}>
             Get ETH Balance (QuickNode API)
           </Button>
           <Heading
