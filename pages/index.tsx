@@ -8,7 +8,7 @@ import {
 } from '@thirdweb-dev/react'
 import type { NextPage } from 'next'
 import {
-  Flex, Heading, Box, Text, Button,
+  Flex, Heading, Box, Text, Button, useBreakpointValue,
 } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import * as ethers from 'ethers'
@@ -89,6 +89,8 @@ const Home: NextPage = () => {
     openzeppelinUrl = process.env.NEXT_PUBLIC_OPENZEPPELIN_URL
   }
 
+  const isMobile = useBreakpointValue({ base: true, lg: false })
+
   return (
     <Box>
       <Box>
@@ -114,6 +116,7 @@ const Home: NextPage = () => {
 
           <Flex
             justify="space-between"
+            flexDirection={isMobile ? 'column' : 'row'}
           >
             <ThirdwebProvider
               desiredChainId={activeChainId}
